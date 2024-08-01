@@ -47,12 +47,12 @@ const editCustomer = async (payload:Customer , customerId: number)=>{      //wha
     }
 
     if(payload.mobilePhone){
-        const searchForUniqness = await Customer.findOne({where: {mobilePhone: payload.mobilePhone}})
-        if(JSON.stringify(searchForUniqness) == JSON.stringify(customer)){
+        const searchForUniqueness = await Customer.findOne({where: {mobilePhone: payload.mobilePhone}})
+        if(JSON.stringify(searchForUniqueness) == JSON.stringify(customer)){
             throw new AppError("ur using thie phone number already" , 409 , true)
         }
 
-        if(searchForUniqness){
+        if(searchForUniqueness){
             throw new AppError("theres already exist a customer with this phone number , you cant edit ur phone number to this phone number!!" , 409 , true)
         }
         customer.mobilePhone = payload.mobilePhone
